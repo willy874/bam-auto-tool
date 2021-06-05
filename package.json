@@ -1,5 +1,5 @@
 {
-  "name": "bamboodiary",
+  "name": "bam-auto-tool",
   "version": "0.0.0",
   "scripts": {
     "index": "node create-index",

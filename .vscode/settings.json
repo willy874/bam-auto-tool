@@ -1,0 +1,13 @@
+{
+  "files.autoSave": "onWindowChange",
+  "vetur.validation.template": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "eslint.validate": ["javascript", "vue"]
+}

@@ -2,17 +2,15 @@ const path = require('path')
 const root = process.env.ROOT || path.join(__dirname, '..', '..')
 
 module.exports = {
-  root,
-  inputFolder: [root, 'plugins', 'icon', 'assets'],
-  outputFolder: [root, 'plugins', 'icon', 'pattern'],
+  input: {},
+  output: {},
   svgRules: {
     allows: ['xmlns', 'xlink', 'viewBox'],
     attrs: {
       fill: 'currentColor',
     },
   },
-  patternRules: [
-    {
+  patternRules: [{
       name: 'path',
       allows: ['d', 'stroke-width', 'stroke'],
     },

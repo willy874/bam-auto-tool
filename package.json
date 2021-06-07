@@ -1,6 +1,7 @@
 {
   "name": "bam-auto-tool",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "main": "./scripts/index.js",
   "scripts": {
     "index": "node create-index",
     "model": "node model",
@@ -14,26 +15,19 @@
     "tool": "node tool.config.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "bam-utility-plugin": "git+https://github.com/willy874/bam-utility-plugin.git",
-    "classnames": "^2.3.1",
     "dayjs": "^1.10.4",
     "lodash": "^4.17.21",
     "mysql": "^2.18.1",
     "uuid": "^8.3.2",
-    "validate.js": "^0.13.1",
-    "vue": "^3.0.11"
+    "dotenv": "^8.2.0",
+    "colors": "^1.4.0",
+    "parse5": "^6.0.1",
+    "prettier": "2.2.1"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.2",
     "@rollup/plugin-json": "^4.1.0",
-    "colors": "^1.4.0",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "parse5": "^6.0.1",
-    "prettier": "2.2.1",
     "rollup": "^2.45.2",
     "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-commonjs": "^10.1.0",

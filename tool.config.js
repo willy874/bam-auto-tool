@@ -1,3 +1,4 @@
+const path = require('path')
 const {
   FileName
 } = require('bam-utility-plugins')
@@ -36,5 +37,9 @@ require('./scripts/index')({
       }
     },
     overwrite: true
+  },
+  ckeditor: {
+    output: 'dist/ckeditor',
+    filename: 'ckeditor.js'
   }
 })

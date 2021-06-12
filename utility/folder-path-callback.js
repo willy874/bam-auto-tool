@@ -13,7 +13,7 @@ const readDirectory = args => {
       const stat = await fs.stat(url)
       const filename = new FileName(file)
       if (stat.isFile()) {
-        const type = /\./.test(filename.name) ? 'file' : 'none';
+        const type = /\./.test(filename.name) ? 'file' : 'none'
         const fileData = {
           url,
           name: filename.name,

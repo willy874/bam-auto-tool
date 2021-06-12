@@ -16,7 +16,7 @@ const {
  */
 
 module.exports = async function (config) {
-  console.log('Models building...'.blue);
+  console.log('Models building...'.blue)
   await inputPathCallback(config, async (inputFolder, inputData) => {
     await folderPathCallback(inputFolder, async (filePath) => {
       await outputPathCallback(config, inputData, async (folder, input, output) => {
@@ -45,5 +45,5 @@ module.exports = async function (config) {
   await createIndex({
     input: config.output
   })
-  console.log('Models buildedEnd...'.blue);
+  console.log('Models buildedEnd...'.blue)
 }

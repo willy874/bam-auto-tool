@@ -39,7 +39,8 @@ require('./scripts/index')({
     overwrite: true
   },
   ckeditor: {
-    output: 'dist/ckeditor',
+    input: 'ckeditor/ckeditor.js',
+    output: 'ckeditor/build',
     filename: 'ckeditor.js'
   }
 })

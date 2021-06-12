@@ -7,11 +7,10 @@ const createIndex = require('../create-index/create-webpack')
 const {
   Observable,
   FileName
-} = require('bam-utility-plugin')
-
-const resolvePath = (url) => {
-  return path.join(process.cwd(), ...url.split(/\/|\\/))
-}
+} = require('bam-utility-plugins')
+const {
+  resolvePath
+} = require('../utility')
 
 const parseDomMap = (document, callback) => {
   const loop = dom => {
@@ -69,40 +68,36 @@ module.exports = async function (paramsConfig) {
             const document = parse5.parse(fileData.toString())
             const svgAttr = []
             const pattern = []
-            try {
-              parseDomMap(document, dom => {
-                if (dom.tag === 'svg') {
-                  Object.keys(dom.attrs).forEach(key => {
-                    if (config.svgRules.allows.includes(key)) {
-                      svgAttr.push(`\n${key}: '${dom.attrs[key]}'`)
-                    }
-                  })
-                  Object.keys(config.svgRules.attrs).forEach(key => {
-                    svgAttr.push(`\n${key}: '${config.svgRules.attrs[key]}'`)
-                  })
-                }
-                if (config.patternRules.map(p => p.name).includes(dom.tag)) {
-                  const tagData = config.patternRules.find(p => p.name === dom.tag)
-                  pattern.push(
-                    (dom.tag === 'text') ? (
-                      `\n<text${Object.keys(dom.attrs || {})
+            parseDomMap(document, dom => {
+              if (dom.tag === 'svg') {
+                Object.keys(dom.attrs).forEach(key => {
+                  if (config.svgRules.allows.includes(key)) {
+                    svgAttr.push(`\n${key}: '${dom.attrs[key]}'`)
+                  }
+                })
+                Object.keys(config.svgRules.attrs).forEach(key => {
+                  svgAttr.push(`\n${key}: '${config.svgRules.attrs[key]}'`)
+                })
+              }
+              if (config.patternRules.map(p => p.name).includes(dom.tag)) {
+                const tagData = config.patternRules.find(p => p.name === dom.tag)
+                pattern.push(
+                  (dom.tag === 'text') ? (
+                    `\n<text${Object.keys(dom.attrs || {})
                       .map(key => {
                         return tagData.allows.includes(key) ? getDomAttr(dom,key) : ''
                       })
                       .join('')}>${dom.children.map(child => child.text).join('')}</text>`
-                    ) : (
-                      `\n<${dom.tag}${Object.keys(dom.attrs || {})
+                  ) : (
+                    `\n<${dom.tag}${Object.keys(dom.attrs || {})
                       .map(key => {
                         return tagData.allows.includes(key) ? getDomAttr(dom,key) : ''
                       })
                       .join('')}/>`
-                    )
                   )
-                }
-              })
-            } catch (error) {
-              console.log('error', error)
-            }
+                )
+              }
+            })
             const filenameData = new FileName(filename)
             const fsString = 'export default {' +
               `\nmount: '.icon-${filenameData.data.join('-')}',` +

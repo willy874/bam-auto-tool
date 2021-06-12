@@ -1,5 +1,4 @@
-import DataModel from '../proto/data'
-import { ImageModel } from './index'
+import { DataModel, ImageModel } from '../index'
 
 /**
  * @extends DataModel
@@ -18,7 +17,7 @@ import { ImageModel } from './index'
  */
 export default class NavigationModel extends DataModel {
   constructor(args) {
-    super(args)
+    ExtendsSuper(args)
     const entity = args || {}
     this.id = entity.id || 0
     this.uuid = entity.uuid || ''
@@ -33,6 +32,6 @@ export default class NavigationModel extends DataModel {
     this.group_name = entity.group_name || ''
     this.icon = new ImageModel(entity.icon)
     // proto set
-    this.api = 'navigation'
+    this.api = entity.api || 'navigation'
   }
 }

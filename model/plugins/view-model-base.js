@@ -1,43 +1,39 @@
-const _uniq = require('lodash/uniq')
-const _concat = require('lodash/concat')
+const path = require('path')
+const {
+  FileName,
+} = require('bam-utility-plugins')
 
-// FIXME: 進行生產字串微調，要同步到其他專案
-module.exports = function (ops, modelName) {
+module.exports = async function (ops) {
+  const modelName = new FileName(path.basename(ops.filePath)).ConverBigHump()
   const model = ops.schema[modelName]
-  const {
-    FileName
-  } = ops.methods
   const isModel = (type) => typeof type === 'string' && /Model$/.test(type)
+  const importModels = []
+  const pushDepend = (m) => {
+    const module = m.replace(/Model/, '')
+    if (!importModels.includes(module)) {
+      importModels.push(module)
+    }
+  }
   // 繼承模組
-  const importExtendsModel =
-    model.extends === 'DataModel' ?
-    `import DataModel from '../proto/data'\n` :
-    `import ${model.extends} from './${new FileName(model.extends.replace('Model', '')).data.join('-')}'\n`
+  const extendsModel = 'Extends' + model.extends
+  if (model.extends) {
+    pushDepend(model.extends)
+  }
   // 依賴模組
-  const importModule = (() => {
-    const arr = []
-    return _uniq(
-      _concat(
-        arr,
-        model.tebles.filter((table) => isModel(table.type)).map((t) => t.type),
-        model.tebles.filter((table) => isModel(table.itemType)).map((t) => t.itemType)
-      )
-    )
-  })()
-  // 註解文字建立
-  const commentText =
-    '' +
-    '/**\n' +
-    ` * @extends ${model.extends}\n` +
-    (model.description ? ` * ${model.description}\n` : '') +
-    model.tebles
-    .map((table) => {
-      const tableType = table.type.name || table.type
-      const itemType = table.itemType ? `.<${table.itemType}>` : ''
-      return ` * @property {${tableType}${itemType}} ${table.name} ${table.description}\n`
-    })
-    .join('') +
-    ' */\n'
+  model.tebles.filter(table => {
+    return isModel(table.type) || isModel(table.itemType)
+  }).forEach(table => {
+    if (table.type) pushDepend(table.type)
+    if (table.itemType) pushDepend(table.itemType)
+  })
+  // api 規則建立模組
+  const apiPath = () => {
+    if (model.api) {
+      return model.api
+    }
+    const base = ops.baseInputPath.split(/\/|\\/).join('/')
+    return ops.filePath.replace(/\.ts|\.js|\.json/, '').split(/\/|\\/).join('/').replace(base + '/', '')
+  }
   // 預設值
   const defaultValueText = (table) => {
     const value = table.default
@@ -59,20 +55,21 @@ module.exports = function (ops, modelName) {
     }
     return `entity.${table.name} || ${defaultValueText(table)}`
   }
-  return (
-    '' +
-    importExtendsModel +
-    (importModule.length ? `import {${importModule.join(',')}} from './index'\n` : '') +
-    '\n' +
-    commentText +
-    `export default class ${modelName}Model extends ${model.extends}{\n` +
-    `constructor(args){\n` +
-    `super(args)\n` +
-    `const entity = args || {}\n` +
-    model.tebles.map((table) => `this.${table.name} = ${tableValueTable(table)}\n`).join('') +
-    '// proto set\n' +
-    `this.api = entity.api || '${new FileName(modelName).data.join('-')}'\n` +
-    `}\n` +
-    '}\n'
-  )
+
+  const modelClassString = (`
+  class ${modelName}Model${extendsModel} {
+    constructor(args){
+      ExtendsSuper(args)
+      const entity = args || {}
+      ${model.tebles.map((table) => `this.${table.name} = ${tableValueTable(table)}`).join('\n      ')}
+      // proto set
+      this.api = entity.api || '${apiPath()}'
+    }
+  }
+  `)
+
+  const modelClass = eval(`;(${modelClassString})`)
+  modelClass.extendsModel = extendsModel
+  modelClass.importModels = importModels
+  return modelClass
 }

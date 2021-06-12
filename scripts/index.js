@@ -2,7 +2,7 @@ require('dotenv').config()
 require('colors')
 const scriptModules = {
   svg: require('../svg'),
-  // model: require('../model'),
+  model: require('../model'),
   index: require('../create-index')
 }
 

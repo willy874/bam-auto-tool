@@ -1,4 +1,4 @@
-import DataModel from '../proto/data'
+import { DataModel } from '../index'
 
 /**
  * @extends DataModel
@@ -14,7 +14,7 @@ import DataModel from '../proto/data'
  */
 export default class ImageModel extends DataModel {
   constructor(args) {
-    super(args)
+    ExtendsSuper(args)
     const entity = args || {}
     this.id = entity.id || 0
     this.name = entity.name || ''
@@ -26,6 +26,6 @@ export default class ImageModel extends DataModel {
     this.title = entity.title || ''
     this.infomation = entity.infomation || ''
     // proto set
-    this.api = 'image'
+    this.api = entity.api || 'image'
   }
 }

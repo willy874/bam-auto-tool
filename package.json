@@ -1,29 +1,22 @@
 {
   "name": "bam-auto-tool",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./scripts/index.js",
   "scripts": {
-    "index": "node create-index",
-    "model": "node model",
-    "svg": "node svg",
     "format": "prettier --write \"src/**/*.{js,vue,scss}\"",
-    "plugin": "node rollup-bundle",
-    "migration": "node migration",
-    "migrat:create": "node migration/create",
-    "migrat:update": "node migration/update",
-    "migrat:reset": "node migration/reset",
-    "tool": "node tool.config.js"
+    "tool": "node tool.config.js",
+    "test": "node tests"
   },
   "dependencies": {
-    "bam-utility-plugin": "git+https://github.com/willy874/bam-utility-plugin.git",
+    "bam-utility-plugins": "git+ssh://git@github.com/willy874/bam-utility-plugins.git",
+    "colors": "^1.4.0",
     "dayjs": "^1.10.4",
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.21",
     "mysql": "^2.18.1",
-    "uuid": "^8.3.2",
-    "dotenv": "^8.2.0",
-    "colors": "^1.4.0",
     "parse5": "^6.0.1",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.2",

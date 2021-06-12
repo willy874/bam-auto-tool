@@ -1,14 +1,22 @@
+const {
+  FileName
+} = require('bam-utility-plugins')
+
 require('./scripts/index')({
   index: {
-    input: [{
-        path: 'model/view',
-        type: 'cjs'
-      },
+    input: [
+      'model/view',
+      'model/schema',
       {
-        path: 'model/schema',
-        type: 'cjs'
+        path: 'utility',
+        fileNameHandler: f => {
+          return new FileName(f).ConverLittleHump()
+        }
       }
-    ]
+    ],
+    output: {
+      type: 'cjs',
+    }
   },
   svg: {
     input: {
@@ -17,5 +25,16 @@ require('./scripts/index')({
     output: {
       path: 'svg/pattern'
     },
+  },
+  model: {
+    input: 'model/schema',
+    output: {
+      path: 'model/view',
+      overwrite: {
+        // exclude: [/\\image\./]
+        // allow: [/\\image\./]
+      }
+    },
+    overwrite: true
   }
 })

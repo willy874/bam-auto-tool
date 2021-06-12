@@ -1,4 +1,4 @@
-import DataModel from '../proto/data'
+import { DataModel } from '../index'
 
 /**
  * @extends DataModel
@@ -14,7 +14,7 @@ import DataModel from '../proto/data'
  */
 export default class ArticleModel extends DataModel {
   constructor(args) {
-    super(args)
+    ExtendsSuper(args)
     const entity = args || {}
     this.subject = entity.subject || ''
     this.content = entity.content || ''
@@ -26,6 +26,6 @@ export default class ArticleModel extends DataModel {
     this.published_at = entity.published_at || ''
     this.finished_at = entity.finished_at || ''
     // proto set
-    this.api = 'article'
+    this.api = entity.api || 'article'
   }
 }

@@ -10,6 +10,8 @@ module.exports = async function (config) {
   await inputPathCallback(config, async (folder, input = {}, output = {}) => {
     if (input && input.type === 'cjs') {
       await createNodeIndex(resolvePath(folder), input, output)
+    } else if (input && input.type === 'esm') {
+      await createWebpackIndex(resolvePath(folder), input, output)
     } else {
       if (output && output.type === 'cjs') {
         await createNodeIndex(resolvePath(folder), input, output)
@@ -18,4 +20,5 @@ module.exports = async function (config) {
       }
     }
   })
+  console.log('Create index builded end.'.blue)
 }

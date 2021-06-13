@@ -7,6 +7,8 @@ const {
 
 module.exports = async function (folder, input = {}, output = {}) {
   const outputFileName = output.filename || 'index.js'
+  const outputSuffix = input.suffix || output.suffix || ''
+  const outputPrefix = input.prefix || output.prefix || ''
   const outputFileNameHandler = input.fileNameHandler || output.fileNameHandler || (f => {
     return new FileName(f).ConverBigHump()
   })
@@ -16,9 +18,9 @@ module.exports = async function (folder, input = {}, output = {}) {
       if (indexOf >= 0) fileNames.splice(indexOf, 1)
       const WriteWebpackIndex = () => {
         const strImport = fileNames
-          .map(f => `import ${outputFileNameHandler(f) + (output.suffix || '')} from './${f}'\n`)
+          .map(f => `import ${outputPrefix + outputFileNameHandler(f) + outputSuffix} from './${f}'\n`)
           .join('')
-        const strExport = fileNames.map(f => `\n${outputFileNameHandler(f) + (output.suffix || '')}`).join(',')
+        const strExport = fileNames.map(f => `\n${outputPrefix +outputFileNameHandler(f) + outputSuffix}`).join(',')
         return `${strImport}\nexport {${strExport}\n}\n`
       }
       const writeString = prettier.format(WriteWebpackIndex(), {

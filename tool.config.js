@@ -6,8 +6,12 @@ const {
 require('./scripts/index')({
   index: {
     input: [
-      'model/view',
       'model/schema',
+      {
+        path: 'model/view',
+        type: 'esm',
+        suffix: 'Model'
+      },
       {
         path: 'utility',
         fileNameHandler: f => {
@@ -28,7 +32,9 @@ require('./scripts/index')({
     },
   },
   model: {
-    input: 'model/schema',
+    input: {
+      path: 'model/schema'
+    },
     output: {
       path: 'model/view',
       overwrite: {

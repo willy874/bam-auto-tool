@@ -43,7 +43,11 @@ module.exports = async function (config) {
     })
   })
   await createIndex({
-    input: config.output
+    input: {
+      path: typeof config.output === 'string' ? config.output : config.output.path,
+      type: 'esm',
+      suffix: 'Model'
+    },
   })
-  console.log('Models buildedEnd...'.blue)
+  console.log('Models builded end.'.blue)
 }

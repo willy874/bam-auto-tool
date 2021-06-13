@@ -1,5 +1,5 @@
-import Article from './article.js'
-import Image from './image.js'
-import Navigation from './navigation.js'
+import ArticleModel from './article.js'
+import ImageModel from './image.js'
+import NavigationModel from './navigation.js'
 
-export { Article, Image, Navigation }
+export { ArticleModel, ImageModel, NavigationModel }

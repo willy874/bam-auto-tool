@@ -6,6 +6,8 @@ const {
 } = require('bam-utility-plugins')
 module.exports = async function (folder, input = {}, output = {}) {
   const outputFileName = output.filename || 'index.js'
+  const outputSuffix = input.suffix || output.suffix || ''
+  const outputPrefix = input.prefix || output.prefix || ''
   const outputFileNameHandler = input.fileNameHandler || output.fileNameHandler || (f => {
     return new FileName(f).ConverBigHump()
   })
@@ -16,7 +18,7 @@ module.exports = async function (folder, input = {}, output = {}) {
       const WriteNodejsIndex = () => {
         const strExport = fileNames
           .filter(f => /\.js$/.test(f))
-          .map(f => `\n${outputFileNameHandler(f) + (output.suffix || '')}: require('./${f}')`)
+          .map(f => `\n${outputPrefix + outputFileNameHandler(f) + outputSuffix}: require('./${f}')`)
           .join(',')
         return `module.exports = {${strExport}\n}\n`
       }

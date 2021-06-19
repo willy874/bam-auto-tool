@@ -1,4 +1,4 @@
-module.exports = (str, reg) => {
+module.exports = (reg, str) => {
   const checkType = s => {
     if (typeof s === 'string') {
       return new RegExp(s).test(str)

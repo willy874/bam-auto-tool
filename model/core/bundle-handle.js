@@ -33,6 +33,7 @@ const handler = (ops, modelClass) => {
   export default ${
     ops.writeString.toString()
     .replace(modelClass.extendsModel, ` extends ${model.extends}`)
+    .replace('ExtendsSuper', 'super')
   }
   `
 }

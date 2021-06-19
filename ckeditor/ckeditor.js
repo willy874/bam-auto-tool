@@ -12,7 +12,7 @@ import FontSize from '@ckeditor/ckeditor5-font/src/fontsize.js';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
 import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight.js';
 import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed.js';
-import Image from '@ckeditor/ckeditor5-image/src/image.js';
+// import Image from '@ckeditor/ckeditor5-image/src/image.js';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption.js';
 import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert.js';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize.js';
@@ -52,7 +52,7 @@ Editor.builtinPlugins = [
 	Heading,
 	Highlight,
 	HtmlEmbed,
-	Image,
+	// Image,
 	ImageCaption,
 	ImageInsert,
 	ImageResize,

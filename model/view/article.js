@@ -14,7 +14,7 @@ import { DataModel } from '../index'
  */
 export default class ArticleModel extends DataModel {
   constructor(args) {
-    ExtendsSuper(args)
+    super(args)
     const entity = args || {}
     this.subject = entity.subject || ''
     this.content = entity.content || ''

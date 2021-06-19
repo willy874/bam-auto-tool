@@ -14,7 +14,7 @@ import { DataModel } from '../index'
  */
 export default class ImageModel extends DataModel {
   constructor(args) {
-    ExtendsSuper(args)
+    super(args)
     const entity = args || {}
     this.id = entity.id || 0
     this.name = entity.name || ''

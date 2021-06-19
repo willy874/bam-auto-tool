@@ -17,7 +17,7 @@ import { DataModel, ImageModel } from '../index'
  */
 export default class NavigationModel extends DataModel {
   constructor(args) {
-    ExtendsSuper(args)
+    super(args)
     const entity = args || {}
     this.id = entity.id || 0
     this.uuid = entity.uuid || ''

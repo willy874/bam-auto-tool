@@ -50,16 +50,16 @@ const indexConfig = {
 
 ### input API
 
-| name            | type                    | default                 | description                  |
-| --------------- | ----------------------- | ----------------------- | ---------------------------- |
-| input           | Object , Array , String | undefined               |                              |
-| output          | Object , Array , String | undefined               |                              |
-| path            | String                  | \`${root}\`             |                              |
-| type            | String                  | 'esm'                   | file type,support cjs & esm. |
-| prefix          | String                  | ''                      |                              |
-| suffix          | String                  | ''                      |                              |
-| filename        | String                  | index.js                |                              |
-| fileNameHandler | Function                | (f) => ConverBigHump(f) | file ouput name,fix rule.    |
+| name            | type                    | default                 | description                               |
+| --------------- | ----------------------- | ----------------------- | ----------------------------------------- |
+| input           | Object , Array , String | undefined               | input path or input setting.              |
+| output          | Object , Array , String | undefined               | output setting.                           |
+| path            | String                  | \`${root}\`             | if input not string, index folder folder. |
+| type            | String                  | 'esm'                   | file type,support cjs & esm.              |
+| prefix          | String                  | ''                      | file ouput name, prefix text.             |
+| suffix          | String                  | ''                      | file ouput name, suffix text.             |
+| filename        | String                  | index.js                | index file name.                          |
+| fileNameHandler | Function                | (f) => ConverBigHump(f) | file ouput name,fix rule.                 |
 
 ### 規則
 
@@ -72,3 +72,11 @@ const indexConfig = {
 ```bash
 $ npm run tool index
 ```
+
+## Create Model
+
+## Conver SVG assets
+
+## Create ckeditor bundle
+
+## MySQL migration

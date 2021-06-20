@@ -9,6 +9,9 @@ module.exports = async function (ops) {
   const isModel = (type) => typeof type === 'string' && /Model$/.test(type)
   const importModels = []
   const pushDepend = (m) => {
+    if (typeof m !== 'string') {
+      return
+    }
     const module = m.replace(/Model/, '')
     if (!importModels.includes(module)) {
       importModels.push(module)

@@ -1,5 +1,7 @@
 # BAM AUTO TOOL
 
+本工具協助專案運行，產生各種專案所需的相應檔案。
+
 ## 使用方式
 
 1. 在 root 建立 `tool.config.js`
@@ -11,7 +13,6 @@ require('bam-auto-tool')({
   index: {},
   svg: {},
   model: {},
-  ckeditor: {},
 })
 ```
 
@@ -72,11 +73,3 @@ const indexConfig = {
 ```bash
 $ npm run tool index
 ```
-
-## Create Model
-
-## Conver SVG assets
-
-## Create ckeditor bundle
-
-## MySQL migration

@@ -4,7 +4,6 @@ const scriptModules = {
   svg: require('../svg'),
   model: require('../model'),
   index: require('../create-index'),
-  ckeditor: require('../ckeditor')
 }
 
 module.exports = function (config) {
